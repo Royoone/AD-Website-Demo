@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微生物组GWAS分析 - 特应性皮炎葡萄球菌资源库</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="gwas.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="images/logo.svg" alt="皮肤微生物组标志" height="50">
+            <h1>特应性皮炎葡萄球菌资源库</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="#strains"><i class="fas fa-bacteria"></i> 菌株数据库</a></li>
+                <li><a href="#genomics"><i class="fas fa-dna"></i> 基因组分析</a></li>
+                <li><a href="gwas.html" class="active"><i class="fas fa-chart-bar"></i> GWAS分析</a></li>
+                <li><a href="search.html"><i class="fas fa-search"></i> 搜索</a></li>
+                <li><a href="#resources"><i class="fas fa-book"></i> 团队信息</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i> 关于我们</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="gwas-intro">
+            <h2>微生物组全基因组关联分析 (Microbiome GWAS)</h2>
+            <p>微生物组GWAS分析是一种强大的工具，用于探索微生物特征与宿主表型之间的关联。它可以帮助我们理解哪些微生物特征可能与疾病风险、临床表现或其他宿主特征相关联。</p>
+            <p>我们的分析工具支持三种类型的微生物组GWAS分析：</p>
+            <ul>
+                <li><strong>菌株级GWAS</strong>：分析特定菌株的存在/丰度与宿主表型的关联</li>
+                <li><strong>基因级GWAS</strong>：分析微生物功能基因与宿主表型的关联</li>
+                <li><strong>SNP级GWAS</strong>：分析微生物基因组中的单核苷酸多态性与宿主表型的关联</li>
+            </ul>
+        </section>
+
+        <section class="gwas-tool">
+            <div class="tool-header">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="data-tab">数据选择</button>
+                    <button class="tab-btn" data-tab="param-tab">参数设置</button>
+                    <button class="tab-btn" data-tab="result-tab">分析结果</button>
+                </div>
+            </div>
+
+            <div class="tool-container">
+                <!-- 数据选择面板 -->
+                <div id="data-tab" class="tab-panel active">
+                    <div class="form-group">
+                        <h3>GWAS类型</h3>
+                        <div class="input-group">
+                            <label for="gwas-type">选择分析类型：</label>
+                            <select id="gwas-type" required>
+                                <option value="strain">菌株级GWAS</option>
+                                <option value="gene">基因级GWAS</option>
+                                <option value="snp">SNP级GWAS</option>
+                            </select>
+                        </div>
+                        <p id="gwas-type-desc" class="input-desc">菌株级GWAS：研究特定菌株的存在/丰度与宿主表型之间的关联</p>
+                    </div>
+
+                    <div class="form-group">
+                        <h3>宿主表型数据</h3>
+                        <div class="input-group">
+                            <label for="phenotype">选择表型：</label>
+                            <select id="phenotype" required>
+                                <option value="disease">疾病状态</option>
+                                <option value="age">年龄</option>
+                                <option value="gender">性别</option>
+                                <option value="bmi">BMI</option>
+                                <option value="diet">饮食习惯</option>
+                                <option value="medication">药物使用</option>
+                                <option value="inflammation">炎症指标</option>
+                            </select>
+                        </div>
+
+                        <div id="disease-subtype-group" class="input-group">
+                            <label for="disease-subtype">疾病类型：</label>
+                            <select id="disease-subtype">
+                                <option value="ad">特应性皮炎(AD)</option>
+                                <option value="diabetes">糖尿病(Diabetes)</option>
+                                <option value="ibd">炎症性肠病(IBD)</option>
+                                <option value="obesity">肥胖(Obesity)</option>
+                                <option value="asthma">哮喘(Asthma)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h3>数据集选择</h3>
+                        <div class="input-group">
+                            <label for="dataset">选择数据集：</label>
+                            <select id="dataset" required>
+                                <option value="skin_microbiome">皮肤微生物组数据集 (n=120)</option>
+                                <option value="gut_microbiome">肠道微生物组数据集 (n=350)</option>
+                                <option value="oral_microbiome">口腔微生物组数据集 (n=180)</option>
+                                <option value="custom">自定义数据集</option>
+                            </select>
+                        </div>
+
+                        <div id="custom-dataset-group" class="input-group" style="display: none;">
+                            <label for="custom-features">特征矩阵 (.csv)：</label>
+                            <input type="file" id="custom-features" accept=".csv,.txt,.tsv">
+                            <span class="file-desc">*特征矩阵应包含样本x特征的丰度数据</span>
+                            
+                            <label for="custom-metadata">元数据 (.csv)：</label>
+                            <input type="file" id="custom-metadata" accept=".csv,.txt,.tsv">
+                            <span class="file-desc">*元数据文件应包含样本ID和表型信息</span>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="next-to-param" class="action-btn">下一步：参数设置</button>
+                    </div>
+                </div>
+
+                <!-- 参数设置面板 -->
+                <div id="param-tab" class="tab-panel">
+                    <div class="form-group">
+                        <h3>统计参数</h3>
+                        <div class="input-group">
+                            <label for="p-value-threshold">显著性阈值 (p-value)：</label>
+                            <input type="number" id="p-value-threshold" value="0.05" min="0.00000001" max="0.1" step="0.01">
+                            <span class="input-desc">*建议值为0.05或0.01</span>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="correction-method">多重检验校正方法：</label>
+                            <select id="correction-method">
+                                <option value="fdr">FDR (False Discovery Rate)</option>
+                                <option value="bonferroni">Bonferroni校正</option>
+                                <option value="none">无校正</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="covariates">协变量调整：</label>
+                            <select id="covariates" multiple>
+                                <option value="age">年龄</option>
+                                <option value="gender">性别</option>
+                                <option value="bmi">BMI</option>
+                                <option value="medication">药物使用</option>
+                                <option value="diet">饮食</option>
+                            </select>
+                            <span class="input-desc">*按住Ctrl键可多选</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h3>高级选项</h3>
+                        <div class="input-group">
+                            <label for="population-structure">群体结构校正：</label>
+                            <select id="population-structure">
+                                <option value="none">无校正</option>
+                                <option value="pca">主成分分析 (PCA)</option>
+                                <option value="mds">多维尺度分析 (MDS)</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="min-prevalence">最小检出率 (%)：</label>
+                            <input type="number" id="min-prevalence" value="10" min="0" max="100" step="1">
+                            <span class="input-desc">*特征在样本中的最小检出率</span>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="abundance-transform">丰度转换方法：</label>
+                            <select id="abundance-transform">
+                                <option value="none">无转换</option>
+                                <option value="log">对数转换</option>
+                                <option value="clr">中心对数比率 (CLR)</option>
+                                <option value="presence">二元化 (有/无)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="back-to-data" class="action-btn secondary">返回：数据选择</button>
+                        <button id="run-analysis" class="action-btn">运行分析</button>
+                    </div>
+                </div>
+
+                <!-- 结果显示面板 -->
+                <div id="result-tab" class="tab-panel">
+                    <div id="analysis-loader" style="display: none;">
+                        <div class="loader"></div>
+                        <p>正在进行微生物组GWAS分析，请稍候...</p>
+                    </div>
+
+                    <div id="analysis-results" style="display: none;">
+                        <div class="result-summary">
+                            <h3>分析摘要</h3>
+                            <div class="summary-grid">
+                                <div class="summary-item">
+                                    <span class="summary-label">分析类型：</span>
+                                    <span id="summary-type" class="summary-value">菌株级GWAS</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">表型：</span>
+                                    <span id="summary-phenotype" class="summary-value">特应性皮炎</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">样本数：</span>
+                                    <span id="summary-samples" class="summary-value">120</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">特征数：</span>
+                                    <span id="summary-features" class="summary-value">350</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">显著特征数：</span>
+                                    <span id="summary-significant" class="summary-value">15</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="result-vis">
+                            <div class="method-tabs">
+                                <button class="method-tab active" data-method="manhattan-method">曼哈顿图</button>
+                                <button class="method-tab" data-method="qq-method">QQ图</button>
+                                <button class="method-tab" data-method="heatmap-method">热图</button>
+                            </div>
+
+                            <div class="method-panels">
+                                <div id="manhattan-method" class="method-panel active">
+                                    <div class="vis-container">
+                                        <div id="manhattan-plot"></div>
+                                    </div>
+                                    <p class="vis-desc">曼哈顿图展示了每个微生物特征的统计显著性，横轴为特征位置，纵轴为-log10(p)值。红色虚线表示显著性阈值，红色点表示显著相关的特征。</p>
+                                </div>
+
+                                <div id="qq-method" class="method-panel">
+                                    <div class="vis-container">
+                                        <div id="qq-plot"></div>
+                                    </div>
+                                    <p class="vis-desc">QQ图比较了观察到的p值分布与理论上的均匀分布，偏离对角线的点表示可能存在真实的关联信号。</p>
+                                </div>
+
+                                <div id="heatmap-method" class="method-panel">
+                                    <div class="vis-container">
+                                        <div id="heatmap-plot"></div>
+                                    </div>
+                                    <p class="vis-desc">热图展示了显著微生物特征与多种表型之间的关联强度，红色表示正相关，蓝色表示负相关。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="result-table">
+                            <h3>显著相关的微生物特征</h3>
+                            <div class="table-container">
+                                <table id="significant-features">
+                                    <thead>
+                                        <tr>
+                                            <th>特征ID</th>
+                                            <th>特征名称</th>
+                                            <th>分类</th>
+                                            <th>p值</th>
+                                            <th>校正后p值</th>
+                                            <th>效应值(β)</th>
+                                            <th>详情</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- 由JavaScript填充 -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button id="download-results" class="action-btn">下载结果</button>
+                            <button id="new-analysis" class="action-btn secondary">新的分析</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="methods-info">
+            <h2>方法说明</h2>
+            <div class="collapsible-container">
+                <div class="collapsible-header">
+                    <h3>微生物组GWAS方法</h3>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsible-content">
+                    <p>微生物组GWAS分析通过以下步骤进行：</p>
+                    <ol>
+                        <li> 数据预处理：对微生物组特征数据进行过滤、标准化和转换</li>
+                        <li> 关联分析：使用统计模型评估微生物特征与宿主表型之间的关联</li>
+                        <li> 多重检验校正：应用FDR或Bonferroni等方法校正多重检验问题</li>
+                        <li> 结果可视化：生成曼哈顿图、QQ图和热图等可视化结果</li>
+                    </ol>
+                    <p>我们的分析支持三种不同类型的微生物组GWAS：</p>
+                    <ul>
+                        <li><strong>菌株级GWAS</strong>：评估特定微生物菌株的存在或丰度与宿主表型的关联</li>
+                        <li><strong>基因级GWAS</strong>：评估微生物功能基因与宿主表型的关联，揭示潜在的功能通路</li>
+                        <li><strong>SNP级GWAS</strong>：评估微生物基因组中的遗传变异与宿主表型的关联，揭示精细的遗传机制</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>特应性皮炎葡萄球菌资源库</h3>
+                <p>致力于推动特应性皮炎相关葡萄球菌研究的开放数据平台</p>
+            </div>
+            <div class="footer-section">
+                <h3>联系我们</h3>
+                <p><i class="fas fa-envelope"></i> luoc19@tsinghua.org.cn </p>
+                <p><i class="fas fa-phone"></i> +86 123 4567 8910</p>
+            </div>
+            <div class="footer-section">
+                <h3>关注我们</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-weixin"></i></a>
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 特应性皮炎葡萄球菌资源库 - 保留所有权利</p>
+        </div>
+    </footer>
+
+    <script src="gwas.js"></script>
+</body>
+</html> 

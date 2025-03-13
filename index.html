@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>特应性皮炎葡萄球菌资源库</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="header">
+        <div class="logo">
+            <img src="images/logo.svg" alt="特应性皮炎葡萄球菌资源库" id="logo-img">
+            <h1>特应性皮炎葡萄球菌资源库</h1>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="#strains"><i class="fas fa-bacteria"></i> 菌株数据库</a></li>
+                <li><a href="#genomics"><i class="fas fa-dna"></i> 基因组分析</a></li>
+                <li><a href="gwas.html"><i class="fas fa-chart-bar"></i> GWAS分析</a></li>
+                <li><a href="search.html"><i class="fas fa-search"></i> 搜索</a></li>
+                <li><a href="#" class="lang-switch" data-lang="en"><i class="fas fa-language"></i> English</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i> 关于我们</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main>
+        <!-- 欢迎模块 -->
+        <section class="welcome-section">
+            <div class="welcome-container">
+                <div class="welcome-content">
+                    <h2>欢迎访问特应性皮炎葡萄球菌资源库</h2>
+                    <p>本资源库致力于收集、整理和分析与特应性皮炎相关的葡萄球菌菌株，为研究特应性皮炎与皮肤微生物组之间的关系提供全面的数据支持与分析工具。</p>
+                    <p>资源库整合了来自全球研究机构的菌株数据，包括临床样本、健康对照以及环境分离株，旨在促进皮肤微生物组与皮肤疾病研究的协作与创新。</p>
+                    <div class="welcome-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">20+</span>
+                            <span class="stat-label">研究机构</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-label">国家/地区</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">研究项目</span>
+                        </div>
+                    </div>
+                    <div class="welcome-buttons">
+                        <a href="#about" class="welcome-btn primary">了解更多</a>
+                        <a href="#genomics" class="welcome-btn secondary">开始分析</a>
+                    </div>
+                </div>
+                <div class="welcome-image">
+                    <img src="images/HomePageFig4.webp" alt="特应性皮炎与葡萄球菌研究">
+                </div>
+            </div>
+        </section>
+
+        <!-- 数据概览区域 -->
+        <section class="dashboard">
+            <h2>数据概览</h2>
+            <div class="dashboard-cards">
+                <div class="card">
+                    <i class="fas fa-flask card-icon"></i>
+                    <h3>菌株总数</h3>
+                    <p class="count" id="strain-count">15,832</p>
+                    <p class="update-time">最近更新：2025-03-12 14:32</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-vial card-icon"></i>
+                    <h3>样本总数</h3>
+                    <p class="count" id="sample-count">32,450</p>
+                    <p class="update-time">最近更新：2025-03-12 14:32</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-plus-circle card-icon"></i>
+                    <h3>近7天新增</h3>
+                    <p class="count" id="new-count">120</p>
+                    <p class="update-time">最近更新：2025-03-12 14:32</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-tasks card-icon"></i>
+                    <h3>近期分析结果</h3>
+                    <p class="count" id="analysis-count">45</p>
+                    <p class="update-time">最近更新：2025-03-12 14:32</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 研究亮点轮播图 -->
+        <section class="research-highlights">
+            <h2>研究亮点</h2>
+            <div class="carousel-container">
+                <div class="carousel-wrapper">
+                    <div class="carousel-slides">
+                        <div class="carousel-slide active">
+                            <div class="slide-content">
+                                <div class="slide-image">
+                                    <img src="images/HomePageFig1.jpg" alt="微生物系统发育树及基因组质量分析">
+                                </div>
+                                <div class="slide-info">
+                                    <h3>微生物系统发育多样性</h3>
+                                    <p>展示了不同门类细菌（包括Firmicutes、Bacteroidetes、Actinobacteria等）的系统发育关系及其基因组测序质量情况，为微生物组研究提供重要参考数据。系统发育树分析帮助我们理解不同门类细菌之间的进化关系与多样性。</p>
+                                    <a href="#genome-quality" class="btn-more">了解更多 <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="slide-content">
+                                <div class="slide-image">
+                                    <img src="images/HomePageFig2.jpg" alt="金黄色葡萄球菌与免疫系统相互作用机制">
+                                </div>
+                                <div class="slide-info">
+                                    <h3>病原菌与宿主免疫互作</h3>
+                                    <p>对比分析了标准金黄色葡萄球菌株与特异性菌株与角质形成细胞的相互作用，揭示了不同菌株诱导的免疫反应差异及其内在机制。研究发现AD菌株可诱导Th2型免疫反应，而标准菌株则主要激活Th1型免疫反应。</p>
+                                    <a href="#host-pathogen" class="btn-more">了解更多 <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="slide-content">
+                                <div class="slide-image">
+                                    <img src="images/HomePageFig3.jpg" alt="金黄色葡萄球菌与角质形成细胞表面分子互作机制">
+                                </div>
+                                <div class="slide-info">
+                                    <h3>病原菌黏附分子机制</h3>
+                                    <p>详细展示了金黄色葡萄球菌与人体角质形成细胞的黏附分子相互作用网络，包括细菌表面蛋白（如Protein A、ClfA等）与宿主受体的特异性结合。这些相互作用共同促进细菌在皮肤表面的黏附、内化和炎症反应。</p>
+                                    <a href="#adhesion-mechanism" class="btn-more">了解更多 <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <span class="carousel-control prev"><i class="fas fa-chevron-left"></i></span>
+                    <div class="carousel-indicators">
+                        <span class="indicator active" data-slide="0"></span>
+                        <span class="indicator" data-slide="1"></span>
+                        <span class="indicator" data-slide="2"></span>
+                    </div>
+                    <span class="carousel-control next"><i class="fas fa-chevron-right"></i></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 主要功能快捷入口 -->
+        <section class="features">
+            <h2>主要功能</h2>
+            <div class="feature-grid">
+                <a href="#strains" class="feature-item">
+                    <i class="fas fa-bacteria"></i>
+                    <h3>菌株数据库</h3>
+                    <p>浏览来自不同患者和环境的金黄色葡萄球菌菌株信息</p>
+                </a>
+                <a href="#genomics" class="feature-item">
+                    <i class="fas fa-dna"></i>
+                    <h3>基因组分析</h3>
+                    <p>探索菌株基因组特征，揭示不同菌株间的遗传差异</p>
+                </a>
+                <a href="gwas.html" class="feature-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>GWAS分析</h3>
+                    <p>基因组关联研究工具，识别与表型相关的遗传标记</p>
+                </a>
+                <a href="#virulence" class="feature-item">
+                    <i class="fas fa-biohazard"></i>
+                    <h3>毒力因子</h3>
+                    <p>查询已知毒力基因的分布，了解其与疾病严重程度的关系</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- How to Cite模块 -->
+        <section class="cite-section">
+            <h2>如何引用</h2>
+            <div class="cite-container">
+                <div class="cite-icon">
+                    <i class="fas fa-quote-left"></i>
+                </div>
+                <div class="cite-content">
+                    <p class="cite-text">如果您在研究中使用了本资源库的数据或分析工具，请按以下格式引用：</p>
+                    <div class="citation-box">
+                        <p>Luo C, Wang S, Shan W, et al. A Whole Exon Screening-Based Score Model Predicts Prognosis and Immune Checkpoint Inhibitor Therapy Effects in Low-Grade Glioma. Front Immunol. 2022;13:909189. Published 2022 Jun 13. doi:10.3389/fimmu.2022.909189</p>
+                        <button class="copy-btn" id="citation-copy-btn"><i class="fas fa-copy"></i> 复制引用</button>
+                    </div>
+                    <div class="citation-formats">
+                        <button class="format-btn active" data-format="apa">APA</button>
+                        <button class="format-btn" data-format="mla">MLA</button>
+                        <button class="format-btn" data-format="bibtex">BibTeX</button>
+                        <button class="format-btn" data-format="ris">RIS</button>
+                    </div>
+                    <p class="additional-info">对于特定菌株或数据集，请同时引用其原始来源论文（可在下载数据时找到相关引用信息）。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 底部信息栏 -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <div class="footer-logo">
+                    <img src="images/logo.svg" alt="菌种资源库" class="footer-logo-img">
+                    <h3>菌种资源库</h3>
+                </div>
+                <p class="copyright">© 2025 微生物数据平台. All Rights Reserved.</p>
+            </div>
+            <div class="footer-center">
+                <h3>友情链接</h3>
+                <ul>
+                    <li><a href="#">相关数据库</a></li>
+                    <li><a href="#">研究机构</a></li>
+                    <li><a href="#">文献资源</a></li>
+                </ul>
+            </div>
+            <div class="footer-right">
+                <h3>联系我们</h3>
+                <p><i class="fas fa-envelope"></i> luoc19@tsinghua.org.cn</p>
+                <a href="#" class="feedback-btn"><i class="fas fa-comment"></i> 意见反馈</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

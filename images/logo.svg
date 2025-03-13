@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景圆形 -->
+  <circle cx="100" cy="100" r="90" fill="#edf7fa" stroke="#1e88e5" stroke-width="4"/>
+  
+  <!-- 细菌图标 - 主体 -->
+  <ellipse cx="100" cy="100" rx="55" ry="30" fill="#26a69a" transform="rotate(30 100 100)"/>
+  
+  <!-- 细菌图标 - 内部结构 -->
+  <ellipse cx="100" cy="100" rx="35" ry="15" fill="#00acc1" transform="rotate(30 100 100)"/>
+  <ellipse cx="100" cy="100" rx="20" ry="8" fill="#ffffff" transform="rotate(30 100 100)"/>
+  
+  <!-- 装饰点 - 代表菌落 -->
+  <circle cx="130" cy="75" r="8" fill="#1e88e5"/>
+  <circle cx="80" cy="125" r="8" fill="#1e88e5"/>
+  <circle cx="85" cy="75" r="5" fill="#1e88e5"/>
+  <circle cx="120" cy="125" r="5" fill="#1e88e5"/>
+  
+  <!-- DNA标志 -->
+  <path d="M65,65 Q85,85 65,105 Q45,125 65,145" stroke="#1e88e5" stroke-width="4" fill="none"/>
+  <path d="M135,65 Q115,85 135,105 Q155,125 135,145" stroke="#1e88e5" stroke-width="4" fill="none"/>
+  
+  <!-- 连接点 -->
+  <circle cx="65" cy="75" r="3" fill="#1e88e5"/>
+  <circle cx="65" cy="95" r="3" fill="#1e88e5"/>
+  <circle cx="65" cy="115" r="3" fill="#1e88e5"/>
+  <circle cx="65" cy="135" r="3" fill="#1e88e5"/>
+  
+  <circle cx="135" cy="75" r="3" fill="#1e88e5"/>
+  <circle cx="135" cy="95" r="3" fill="#1e88e5"/>
+  <circle cx="135" cy="115" r="3" fill="#1e88e5"/>
+  <circle cx="135" cy="135" r="3" fill="#1e88e5"/>
+</svg> 

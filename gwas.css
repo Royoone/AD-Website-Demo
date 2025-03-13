@@ -1,0 +1,672 @@
+/* 微生物组GWAS分析页面样式 */
+:root {
+    --primary-color: #2e7d32;
+    --primary-light: #60ad5e;
+    --primary-dark: #005005;
+    --secondary-color: #455a64;
+    --secondary-light: #718792;
+    --secondary-dark: #1c313a;
+    --accent-color: #ffc107;
+    --text-color: #212121;
+    --background-color: #f5f5f5;
+    --card-color: #ffffff;
+    --header-height: 60px;
+    --border-radius: 8px;
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+    --footer-bg: #263238;
+    --footer-text: #e0e0e0;
+}
+
+/* 头部导航 */
+header {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+    padding: 12px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-container img {
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+    transition: transform 0.3s ease;
+}
+
+.logo-container:hover img {
+    transform: scale(1.05);
+}
+
+.logo-container h1 {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    margin: 0;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 5px;
+}
+
+nav ul li a {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    gap: 6px;
+}
+
+nav ul li a i {
+    font-size: 0.9rem;
+}
+
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+nav ul li a.active {
+    background-color: var(--primary-dark);
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 10px;
+    }
+    
+    .logo-container {
+        margin-bottom: 10px;
+    }
+    
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* GWAS介绍部分 */
+.gwas-intro {
+    background-color: var(--card-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.gwas-intro h2 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.gwas-intro p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.gwas-intro ul {
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.gwas-intro li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+/* GWAS工具区 */
+.gwas-tool {
+    background-color: var(--card-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.tool-header {
+    background-color: var(--secondary-color);
+    padding: 15px;
+    color: white;
+}
+
+.tool-container {
+    padding: 20px;
+}
+
+/* 选项卡系统 */
+.tabs {
+    display: flex;
+    gap: 5px;
+}
+
+.tab-btn {
+    background-color: var(--secondary-light);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.tab-btn:hover {
+    background-color: var(--secondary-dark);
+}
+
+.tab-btn.active {
+    background-color: var(--primary-color);
+}
+
+.tab-panel {
+    display: none;
+    padding: 20px 0;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+/* 表单元素 */
+.form-group {
+    margin-bottom: 25px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--primary-color);
+}
+
+.form-group h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--secondary-dark);
+}
+
+.input-group select,
+.input-group input[type="number"],
+.input-group input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 16px;
+}
+
+.input-group select:focus,
+.input-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
+}
+
+.input-group select[multiple] {
+    height: 120px;
+}
+
+.input-desc, .file-desc {
+    display: block;
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* 按钮 */
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.action-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.action-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.action-btn:hover {
+    background-color: var(--primary-dark);
+}
+
+.action-btn.secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.action-btn.secondary:hover {
+    background-color: var(--secondary-dark);
+}
+
+/* 加载动画 */
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 30px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#analysis-loader {
+    text-align: center;
+    padding: 30px;
+}
+
+#analysis-loader p {
+    margin-top: 15px;
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+}
+
+/* 结果区域 */
+.result-summary {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+}
+
+.result-summary h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.summary-item {
+    padding: 10px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.summary-label {
+    font-weight: 500;
+    color: var(--secondary-color);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.summary-value {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* 可视化方法选项卡 */
+.method-tabs {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    position: relative;
+    z-index: 10;
+}
+
+.method-tab {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.method-tab:hover {
+    background-color: #e0e0e0;
+}
+
+.method-tab.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.method-panel {
+    display: none;
+    margin-top: 10px;
+}
+
+.method-panel.active {
+    display: block;
+}
+
+/* 可视化容器 */
+.vis-container {
+    height: 500px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: visible;
+    margin-bottom: 20px;
+    padding-top: 30px;
+    position: relative;
+}
+
+/* 针对Plotly图表的调整 */
+.js-plotly-plot {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.js-plotly-plot .plotly {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* 针对图例的特殊处理 */
+.js-plotly-plot .legend {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+    top: 10px !important;
+    right: 10px !important;
+    max-height: 80% !important;
+    overflow-y: auto !important;
+}
+
+/* 确保工具提示不被截断 */
+.plotly-notifier, .js-plotly-plot .plotly-notifier {
+    z-index: 20 !important;
+}
+
+.vis-desc {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+    margin-top: 25px;
+}
+
+/* 数据表格 */
+.result-table {
+    margin-top: 30px;
+}
+
+.result-table h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.table-container {
+    overflow-x: auto;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 500;
+}
+
+tbody tr:hover {
+    background-color: rgba(46, 125, 50, 0.05);
+}
+
+.detail-link {
+    color: var(--primary-color);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.detail-link:hover {
+    color: var(--primary-dark);
+}
+
+/* 方法说明部分 */
+.methods-info {
+    background-color: var(--card-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 30px;
+    margin: 40px 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.methods-info h2 {
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.collapsible-container {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.collapsible-header {
+    background-color: #f9f9f9;
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.collapsible-header:hover {
+    background-color: #f0f0f0;
+}
+
+.collapsible-header h3 {
+    margin: 0;
+    color: var(--secondary-dark);
+    font-size: 1.2rem;
+}
+
+.toggle-icon {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+.collapsible-content {
+    padding: 20px;
+    border-top: 1px solid #ddd;
+    background-color: #fff;
+}
+
+.collapsible-content p, .collapsible-content ol, .collapsible-content ul {
+    margin-bottom: 18px;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* 页脚样式 */
+footer {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    padding: 40px 20px 20px;
+    margin-top: 60px;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 30px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+.footer-section h3 {
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background-color: var(--primary-light);
+}
+
+.footer-section p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.footer-section p i {
+    margin-right: 8px;
+    color: var(--primary-light);
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    color: var(--footer-text);
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background-color: var(--primary-light);
+    color: white;
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    margin-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-bottom p {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+}
+
+/* 响应式设计优化 */
+@media (max-width: 768px) {
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .action-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .tabs {
+        flex-direction: column;
+    }
+    
+    .tab-btn {
+        border-radius: 0;
+    }
+    
+    .methods-info {
+        padding: 20px 15px;
+        margin: 30px 10px;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .footer-section {
+        width: 100%;
+    }
+} 

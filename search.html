@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>菌株搜索 - 菌种资源库</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo.svg" alt="菌种资源库" id="logo-img">
+                <h1>菌种资源库</h1>
+            </a>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="search.html" class="active"><i class="fas fa-search"></i> 菌株搜索</a></li>
+                <li><a href="#pangenome"><i class="fas fa-dna"></i> 泛基因组概览</a></li>
+                <li><a href="#gwas"><i class="fas fa-chart-bar"></i> GWAS分析</a></li>
+                <li><a href="#upload"><i class="fas fa-upload"></i> 数据上传</a></li>
+                <li><a href="#download"><i class="fas fa-download"></i> 下载与文档</a></li>
+                <li><a href="#login" class="login-btn"><i class="fas fa-user"></i> 登录/注册</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main>
+        <!-- 搜索功能部分 -->
+        <section id="search" class="search-section">
+            <h2>菌株搜索</h2>
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="strain-search" placeholder="输入菌株ID、名称或特征关键词...">
+                    <button id="search-btn"><i class="fas fa-search"></i> 搜索</button>
+                </div>
+                <div class="search-filters">
+                    <div class="filter-group">
+                        <label>菌种类型：</label>
+                        <select id="strain-type">
+                            <option value="all">全部</option>
+                            <option value="bacteria">细菌</option>
+                            <option value="fungi">真菌</option>
+                            <option value="virus">病毒</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>收集年份：</label>
+                        <select id="collection-year">
+                            <option value="all">全部</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="older">更早</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>地理来源：</label>
+                        <select id="geo-source">
+                            <option value="all">全部</option>
+                            <option value="asia">亚洲</option>
+                            <option value="europe">欧洲</option>
+                            <option value="namerica">北美洲</option>
+                            <option value="samerica">南美洲</option>
+                            <option value="africa">非洲</option>
+                            <option value="oceania">大洋洲</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="advanced-search">
+                    <a href="#" id="advanced-search-toggle">高级搜索 <i class="fas fa-angle-down"></i></a>
+                    <div class="advanced-options" style="display: none;">
+                        <div class="advanced-option">
+                            <label>基因特征：</label>
+                            <input type="text" id="gene-feature" placeholder="输入基因ID或名称">
+                        </div>
+                        <div class="advanced-option">
+                            <label>表型特征：</label>
+                            <input type="text" id="phenotype" placeholder="输入表型特征关键词">
+                        </div>
+                        <div class="advanced-option">
+                            <label>抗性特征：</label>
+                            <input type="text" id="resistance" placeholder="输入抗性特征关键词">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="search-results">
+                <h3>搜索结果</h3>
+                <p class="result-count">显示 <span id="result-num">0</span> 条结果</p>
+                <div class="result-list" id="result-list">
+                    <!-- 结果将通过JavaScript动态加载 -->
+                    <div class="no-results">请输入搜索条件并点击搜索按钮</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 底部信息栏 -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <div class="footer-logo">
+                    <img src="images/logo.svg" alt="菌种资源库" class="footer-logo-img">
+                    <h3>菌种资源库</h3>
+                </div>
+                <p class="copyright">© 2025 微生物数据平台. All Rights Reserved.</p>
+            </div>
+            <div class="footer-center">
+                <h3>友情链接</h3>
+                <ul>
+                    <li><a href="#">相关数据库</a></li>
+                    <li><a href="#">研究机构</a></li>
+                    <li><a href="#">文献资源</a></li>
+                </ul>
+            </div>
+            <div class="footer-right">
+                <h3>联系我们</h3>
+                <p><i class="fas fa-envelope"></i> luoc19@tsinghua.org.cn</p>
+                <a href="#" class="feedback-btn"><i class="fas fa-comment"></i> 意见反馈</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="search.js"></script>
+</body>
+</html> 
